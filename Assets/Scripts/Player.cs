@@ -5,7 +5,7 @@ namespace ColorSwitch
 {
     public class Player : MonoBehaviour
     {
-        public float jumpForce = 10f;
+        public float jumpForce = 7f;
 
         public Rigidbody2D rigid;
         public SpriteRenderer rend;
@@ -13,6 +13,8 @@ namespace ColorSwitch
         public Color[] colors = new Color[4];
 
         public UnityEvent onGameOver;
+
+        public GameObject dieScreen;
 
         private Color currentColor;
 
@@ -52,6 +54,7 @@ namespace ColorSwitch
             {
                 Debug.Log("GAME OVER!");
                 onGameOver.Invoke();
+                GameOver();
             }
         }
 
@@ -59,6 +62,12 @@ namespace ColorSwitch
         {
             int index = Random.Range(0, 4);
             rend.color = colors[index];
+        }
+
+        void GameOver()
+        {
+            Time.timeScale = 0;
+            dieScreen.SetActive(true);
         }
     }
 }
